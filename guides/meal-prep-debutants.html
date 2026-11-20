@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meal prep pour débutants — Recettes Faciles</title>
+<meta name="description" content="Préparez vos repas de la semaine en deux heures le dimanche : méthode pas à pas.">
+<meta name="theme-color" content="#7c2d12">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+:root{--primary:#7c2d12;--primary2:#9a3412;--primary-light:#fdba74;--accent:#c2410c;--bg:#fdf8f2;--card:#fff;--text:#292524;--muted:#78716c;--border:#e7dccf;--hero-sub:#ffedd5;--result-bg:#fff7ed;--result-border:#fdba74;--footer-link:#fdba74}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.65}
+.wrap{max-width:1060px;margin:0 auto;padding:0 16px}
+a{color:var(--accent)}
+header{background:var(--primary);color:#fff;position:sticky;top:0;z-index:50;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.header-in{display:flex;align-items:center;gap:14px;padding:13px 16px;max-width:1060px;margin:0 auto;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;flex:1;min-width:200px}
+.brand .mark{width:38px;height:38px;border-radius:9px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:19px}
+.brand b{font-size:19px}.brand small{display:block;font-size:11.5px;color:var(--primary-light);font-weight:400}
+nav.main-nav{display:flex;gap:4px;flex-wrap:wrap}
+nav.main-nav a{color:#fff;text-decoration:none;padding:7px 11px;border-radius:8px;font-size:14.5px}
+nav.main-nav a:hover{background:rgba(255,255,255,.15)}
+.hero{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;padding:52px 0 46px;text-align:center}
+.hero h1{font-size:clamp(28px,5vw,42px);line-height:1.2;margin-bottom:10px}
+.hero p{font-size:17px;color:var(--hero-sub);max-width:640px;margin:0 auto}
+section{padding:38px 0 8px}
+h2{font-size:25px;margin-bottom:6px;color:var(--primary)}
+.sec-sub{color:var(--muted);margin-bottom:20px;max-width:720px}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.tool{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.tool h3{font-size:18px;margin-bottom:4px;color:var(--primary)}
+.tool p.desc{font-size:14px;color:var(--muted);margin-bottom:14px}
+label{display:block;font-size:13.5px;font-weight:600;margin:10px 0 4px}
+input,select,textarea{width:100%;padding:9px 10px;border:1px solid var(--border);border-radius:8px;font-size:15px;background:#fff;color:var(--text)}
+input[type=number]{-moz-appearance:textfield}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.row3{display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px}
+button.calc{background:var(--accent);color:#fff;border:none;padding:11px 18px;border-radius:9px;font-size:15px;font-weight:700;cursor:pointer;margin-top:14px;width:100%}
+button.calc:hover{filter:brightness(1.08)}
+.result{margin-top:14px;background:var(--result-bg);border:1px solid var(--result-border);border-radius:9px;padding:12px 14px;font-size:15px;display:none}
+.result.show{display:block}
+.result b{color:var(--primary)}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden;font-size:14.5px}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--border)}
+th{background:var(--primary);color:#fff}
+tr:last-child td{border-bottom:none}
+.table-wrap{overflow-x:auto;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.guides-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.guide-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;text-decoration:none;color:var(--text);display:block;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.guide-card:hover{border-color:var(--accent)}
+.guide-card h3{font-size:17.5px;color:var(--primary);margin-bottom:6px}
+.guide-card p{font-size:14px;color:var(--muted)}
+.faq details{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:10px}
+.faq summary{font-weight:700;cursor:pointer;color:var(--primary);font-size:15.5px}
+.faq p{margin-top:8px;font-size:15px}
+footer{background:var(--primary);color:#e8e2d9;padding:34px 0 26px;margin-top:44px;font-size:14px}
+footer h4{color:#fff;margin-bottom:6px}
+footer p{margin-bottom:12px;max-width:760px}
+footer a{color:var(--footer-link)}
+.article{max-width:760px;margin:0 auto;padding:34px 16px}
+.article h1{font-size:30px;line-height:1.25;color:var(--primary);margin-bottom:10px}
+.article .lede{font-size:17.5px;color:var(--muted);margin-bottom:22px}
+.article h2{font-size:21px;margin:26px 0 8px}
+.article h3{font-size:17px;margin:20px 0 6px;color:var(--primary)}
+.article p{margin-bottom:12px}
+.article ul,.article ol{margin:0 0 14px 22px}
+.article li{margin-bottom:6px}
+.backlink{display:inline-block;margin-bottom:18px;font-weight:700;text-decoration:none}
+@media(max-width:640px){.row,.row3{grid-template-columns:1fr}.hero{padding:38px 0 32px}}
+</style>
+</head>
+<body>
+<header><div class="header-in"><a class="brand" href="../index.html"><span class="mark">🍲</span><span><b>Recettes Faciles</b><small>Des recettes simples et savoureuses pour tous les jours</small></span></a><nav class="main-nav"><a href="../index.html#outils">Outils</a><a href="../index.html#tableau">Conversions</a><a href="../index.html#guides">Guides</a><a href="../index.html#faq">FAQ</a></nav></div></header>
+<main class="article"><a class="backlink" href="../index.html">&larr; Retour à l'accueil</a><h1>Meal prep pour débutants</h1><p class="lede">Le meal prep, c'est préparer en une seule session les repas de plusieurs jours. Deux heures le dimanche, et vos déjeuners de la semaine sont prêts. Voici la méthode la plus simple pour commencer sans se décourager.</p>
+<h2>Commencez petit</h2><p>Ne préparez pas sept jours de repas dès la première fois : commencez par trois déjeuners. Choisissez une protéine, un féculent et deux légumes, et déclinez-les en trois plats différents. Quand le rythme est pris, passez à quatre ou cinq jours.</p>
+<h2>La session du dimanche, étape par étape</h2><ol><li><b>Planifiez (10 min) :</b> choisissez vos plats et faites la liste de courses.</li><li><b>Lancez les cuissons longues (40 min) :</b> riz, lentilles, poulet au four : tout cuit en même temps.</li><li><b>Préparez les légumes (20 min) :</b> lavez, coupez, faites revenir ou rôtir.</li><li><b>Assemblez (20 min) :</b> remplissez des boîtes hermétiques, une par repas.</li><li><b>Étiquetez :</b> notez le contenu et la date sur chaque boîte.</li></ol>
+<h2>Trois formules qui marchent</h2><ul><li><b>Le bol :</b> féculent + protéine + légumes + sauce. Variez la sauce pour ne pas vous lasser.</li><li><b>La soupe :</b> une grande marmite, des portions individuelles au congélateur.</li><li><b>Le plat unique :</b> gratin, curry ou ragoût, réchauffé chaque jour.</li></ul>
+<h2>Conservation et réchauffage</h2><p>Les plats préparés se conservent 3 à 4 jours au réfrigérateur. Au-delà, congelez-les. Réchauffez jusqu'à 74 °C à cœur et ne réchauffez jamais deux fois le même plat. Gardez les sauces et les éléments croquants à part, à ajouter au dernier moment.</p>
+<h2>Le matériel utile</h2><p>Des boîtes hermétiques en verre de même taille, qui s'empilent bien ; des étiquettes ; un grand faitout et une plaque de cuisson pour rôtir beaucoup de légumes à la fois. Pas besoin d'équipement coûteux pour commencer.</p></main>
+<footer><div class="wrap"><h4>À propos</h4><p>Recettes Faciles est un site gratuit qui aide les cuisiniers amateurs à réussir leurs plats du quotidien : des outils pratiques, des tableaux de conversion fiables et des guides clairs, sans compte ni inscription.</p><h4>Avertissement</h4><p>Les valeurs nutritionnelles et les conversions sont des estimations moyennes à titre informatif. Elles ne remplacent pas l'avis d'un professionnel de la nutrition ou de la santé. Vérifiez toujours les allergènes et adaptez les recettes à vos besoins.</p><p>&copy; 2026 Recettes Faciles. Tous droits réservés.</p></div></footer>
+</body>
+</html>
