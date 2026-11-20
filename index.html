@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recettes Faciles — Outils de cuisine, conversions et guides</title>
+<meta name="description" content="Recettes Faciles : ajusteur de portions, convertisseur tasses-grammes, estimateur de calories, substitutions d'ingrédients et planificateur de repas avec liste de courses.">
+<meta name="theme-color" content="#7c2d12">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+:root{--primary:#7c2d12;--primary2:#9a3412;--primary-light:#fdba74;--accent:#c2410c;--bg:#fdf8f2;--card:#fff;--text:#292524;--muted:#78716c;--border:#e7dccf;--hero-sub:#ffedd5;--result-bg:#fff7ed;--result-border:#fdba74;--footer-link:#fdba74}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.65}
+.wrap{max-width:1060px;margin:0 auto;padding:0 16px}
+a{color:var(--accent)}
+header{background:var(--primary);color:#fff;position:sticky;top:0;z-index:50;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.header-in{display:flex;align-items:center;gap:14px;padding:13px 16px;max-width:1060px;margin:0 auto;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;flex:1;min-width:200px}
+.brand .mark{width:38px;height:38px;border-radius:9px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:19px}
+.brand b{font-size:19px}.brand small{display:block;font-size:11.5px;color:var(--primary-light);font-weight:400}
+nav.main-nav{display:flex;gap:4px;flex-wrap:wrap}
+nav.main-nav a{color:#fff;text-decoration:none;padding:7px 11px;border-radius:8px;font-size:14.5px}
+nav.main-nav a:hover{background:rgba(255,255,255,.15)}
+.hero{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;padding:52px 0 46px;text-align:center}
+.hero h1{font-size:clamp(28px,5vw,42px);line-height:1.2;margin-bottom:10px}
+.hero p{font-size:17px;color:var(--hero-sub);max-width:640px;margin:0 auto}
+section{padding:38px 0 8px}
+h2{font-size:25px;margin-bottom:6px;color:var(--primary)}
+.sec-sub{color:var(--muted);margin-bottom:20px;max-width:720px}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.tool{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.tool h3{font-size:18px;margin-bottom:4px;color:var(--primary)}
+.tool p.desc{font-size:14px;color:var(--muted);margin-bottom:14px}
+label{display:block;font-size:13.5px;font-weight:600;margin:10px 0 4px}
+input,select,textarea{width:100%;padding:9px 10px;border:1px solid var(--border);border-radius:8px;font-size:15px;background:#fff;color:var(--text)}
+input[type=number]{-moz-appearance:textfield}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.row3{display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px}
+button.calc{background:var(--accent);color:#fff;border:none;padding:11px 18px;border-radius:9px;font-size:15px;font-weight:700;cursor:pointer;margin-top:14px;width:100%}
+button.calc:hover{filter:brightness(1.08)}
+.result{margin-top:14px;background:var(--result-bg);border:1px solid var(--result-border);border-radius:9px;padding:12px 14px;font-size:15px;display:none}
+.result.show{display:block}
+.result b{color:var(--primary)}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden;font-size:14.5px}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--border)}
+th{background:var(--primary);color:#fff}
+tr:last-child td{border-bottom:none}
+.table-wrap{overflow-x:auto;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.guides-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.guide-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;text-decoration:none;color:var(--text);display:block;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.guide-card:hover{border-color:var(--accent)}
+.guide-card h3{font-size:17.5px;color:var(--primary);margin-bottom:6px}
+.guide-card p{font-size:14px;color:var(--muted)}
+.faq details{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:10px}
+.faq summary{font-weight:700;cursor:pointer;color:var(--primary);font-size:15.5px}
+.faq p{margin-top:8px;font-size:15px}
+footer{background:var(--primary);color:#e8e2d9;padding:34px 0 26px;margin-top:44px;font-size:14px}
+footer h4{color:#fff;margin-bottom:6px}
+footer p{margin-bottom:12px;max-width:760px}
+footer a{color:var(--footer-link)}
+.article{max-width:760px;margin:0 auto;padding:34px 16px}
+.article h1{font-size:30px;line-height:1.25;color:var(--primary);margin-bottom:10px}
+.article .lede{font-size:17.5px;color:var(--muted);margin-bottom:22px}
+.article h2{font-size:21px;margin:26px 0 8px}
+.article h3{font-size:17px;margin:20px 0 6px;color:var(--primary)}
+.article p{margin-bottom:12px}
+.article ul,.article ol{margin:0 0 14px 22px}
+.article li{margin-bottom:6px}
+.backlink{display:inline-block;margin-bottom:18px;font-weight:700;text-decoration:none}
+@media(max-width:640px){.row,.row3{grid-template-columns:1fr}.hero{padding:38px 0 32px}}
+</style>
+</head>
+<body>
+<header><div class="header-in"><a class="brand" href="index.html"><span class="mark">🍲</span><span><b>Recettes Faciles</b><small>Des recettes simples et savoureuses pour tous les jours</small></span></a><nav class="main-nav"><a href="#outils">Outils</a><a href="#tableau">Conversions</a><a href="#guides">Guides</a><a href="#faq">FAQ</a></nav></div></header>
+
+<div class="hero"><div class="wrap"><h1>Recettes Faciles</h1><p>Des recettes simples et savoureuses pour tous les jours</p></div></div>
+
+<section id="outils"><div class="wrap"><h2>Outils de cuisine</h2><p class="sec-sub">Cinq outils gratuits pour cuisiner plus facilement, sans inscription.</p>
+<div class="tools-grid">
+<div class="tool"><h3>Ajusteur de recettes</h3><p class="desc">Changez le nombre de portions : les quantités sont recalculées automatiquement.</p>
+<div class="row"><div><label>Portions d'origine</label><input id="sc-from" type="number" value="4" min="1"></div><div><label>Portions souhaitées</label><input id="sc-to" type="number" value="6" min="1"></div></div>
+<label>Ingrédients</label><div class="row3"><input id="sc-name1" value="Farine" aria-label="Ingrédient"><input id="sc-qty1" type="number" value="250" min="0" step="any" aria-label="Quantité"><select id="sc-unit1"><option value="g" selected>g</option><option value="ml">ml</option><option value="c. à soupe">c. à soupe</option><option value="c. à café">c. à café</option><option value="pièce(s)">pièce(s)</option><option value="tasse(s)">tasse(s)</option></select></div><div class="row3"><input id="sc-name2" value="Sucre" aria-label="Ingrédient"><input id="sc-qty2" type="number" value="150" min="0" step="any" aria-label="Quantité"><select id="sc-unit2"><option value="g" selected>g</option><option value="ml">ml</option><option value="c. à soupe">c. à soupe</option><option value="c. à café">c. à café</option><option value="pièce(s)">pièce(s)</option><option value="tasse(s)">tasse(s)</option></select></div><div class="row3"><input id="sc-name3" value="Beurre" aria-label="Ingrédient"><input id="sc-qty3" type="number" value="100" min="0" step="any" aria-label="Quantité"><select id="sc-unit3"><option value="g" selected>g</option><option value="ml">ml</option><option value="c. à soupe">c. à soupe</option><option value="c. à café">c. à café</option><option value="pièce(s)">pièce(s)</option><option value="tasse(s)">tasse(s)</option></select></div><div class="row3"><input id="sc-name4" value="Lait" aria-label="Ingrédient"><input id="sc-qty4" type="number" value="200" min="0" step="any" aria-label="Quantité"><select id="sc-unit4"><option value="g">g</option><option value="ml" selected>ml</option><option value="c. à soupe">c. à soupe</option><option value="c. à café">c. à café</option><option value="pièce(s)">pièce(s)</option><option value="tasse(s)">tasse(s)</option></select></div>
+<button class="calc" id="calc-scale">Calculer</button><div class="result" id="res-scale"></div></div>
+
+<div class="tool"><h3>Convertisseur d'unités</h3><p class="desc">Convertissez tasses en grammes, grammes en tasses, et °F en °C.</p>
+<label>Ingrédient</label><select id="cv-ing"><option value="flour" selected>Farine</option><option value="sugar">Sucre</option><option value="butter">Beurre</option><option value="rice">Riz (cru)</option><option value="milk">Lait</option><option value="honey">Miel</option><option value="cocoa">Cacao en poudre</option><option value="oats">Flocons d'avoine</option><option value="oil">Huile d'olive</option><option value="chicken">Poulet (cru)</option><option value="egg">Œuf</option><option value="potato">Pomme de terre</option><option value="pasta">Pâtes (crues)</option><option value="cheese">Fromage râpé</option><option value="cream">Crème liquide</option><option value="yogurt">Yaourt nature</option><option value="fish">Poisson (filet)</option><option value="lentils">Lentilles (cuites)</option></select>
+<div class="row"><div><label>Conversion</label><select id="cv-mode"><option value="c2g">Tasses → grammes</option><option value="g2c">Grammes → tasses</option><option value="f2c">°F → °C</option><option value="c2f">°C → °F</option></select></div><div><label>Valeur</label><input id="cv-val" type="number" value="1" step="any"></div></div>
+<button class="calc" id="calc-convert">Calculer</button><div class="result" id="res-convert"></div></div>
+
+<div class="tool"><h3>Estimateur de calories par portion</h3><p class="desc">Additionnez vos ingrédients et obtenez les calories par portion.</p>
+<label>Ingrédients</label><div class="row"><select id="cal-ing1"><option value="flour">Farine</option><option value="sugar">Sucre</option><option value="butter">Beurre</option><option value="rice">Riz (cru)</option><option value="milk">Lait</option><option value="honey">Miel</option><option value="cocoa">Cacao en poudre</option><option value="oats">Flocons d'avoine</option><option value="oil">Huile d'olive</option><option value="chicken" selected>Poulet (cru)</option><option value="egg">Œuf</option><option value="potato">Pomme de terre</option><option value="pasta">Pâtes (crues)</option><option value="cheese">Fromage râpé</option><option value="cream">Crème liquide</option><option value="yogurt">Yaourt nature</option><option value="fish">Poisson (filet)</option><option value="lentils">Lentilles (cuites)</option></select><input id="cal-g1" type="number" value="300" min="0" step="any" placeholder="Grammes"></div><div class="row"><select id="cal-ing2"><option value="flour">Farine</option><option value="sugar">Sucre</option><option value="butter">Beurre</option><option value="rice" selected>Riz (cru)</option><option value="milk">Lait</option><option value="honey">Miel</option><option value="cocoa">Cacao en poudre</option><option value="oats">Flocons d'avoine</option><option value="oil">Huile d'olive</option><option value="chicken">Poulet (cru)</option><option value="egg">Œuf</option><option value="potato">Pomme de terre</option><option value="pasta">Pâtes (crues)</option><option value="cheese">Fromage râpé</option><option value="cream">Crème liquide</option><option value="yogurt">Yaourt nature</option><option value="fish">Poisson (filet)</option><option value="lentils">Lentilles (cuites)</option></select><input id="cal-g2" type="number" value="200" min="0" step="any" placeholder="Grammes"></div><div class="row"><select id="cal-ing3"><option value="flour">Farine</option><option value="sugar">Sucre</option><option value="butter">Beurre</option><option value="rice">Riz (cru)</option><option value="milk">Lait</option><option value="honey">Miel</option><option value="cocoa">Cacao en poudre</option><option value="oats">Flocons d'avoine</option><option value="oil" selected>Huile d'olive</option><option value="chicken">Poulet (cru)</option><option value="egg">Œuf</option><option value="potato">Pomme de terre</option><option value="pasta">Pâtes (crues)</option><option value="cheese">Fromage râpé</option><option value="cream">Crème liquide</option><option value="yogurt">Yaourt nature</option><option value="fish">Poisson (filet)</option><option value="lentils">Lentilles (cuites)</option></select><input id="cal-g3" type="number" value="15" min="0" step="any" placeholder="Grammes"></div><div class="row"><select id="cal-ing4"><option value="flour">Farine</option><option value="sugar">Sucre</option><option value="butter">Beurre</option><option value="rice">Riz (cru)</option><option value="milk">Lait</option><option value="honey">Miel</option><option value="cocoa">Cacao en poudre</option><option value="oats">Flocons d'avoine</option><option value="oil">Huile d'olive</option><option value="chicken">Poulet (cru)</option><option value="egg">Œuf</option><option value="potato" selected>Pomme de terre</option><option value="pasta">Pâtes (crues)</option><option value="cheese">Fromage râpé</option><option value="cream">Crème liquide</option><option value="yogurt">Yaourt nature</option><option value="fish">Poisson (filet)</option><option value="lentils">Lentilles (cuites)</option></select><input id="cal-g4" type="number" value="200" min="0" step="any" placeholder="Grammes"></div>
+<label>Nombre de portions</label><input id="cal-portions" type="number" value="2" min="1">
+<button class="calc" id="calc-cal">Calculer</button><div class="result" id="res-cal"></div></div>
+
+<div class="tool"><h3>Substitutions d'ingrédients</h3><p class="desc">Il vous manque un ingrédient ? Trouvez un remplaçant et le bon dosage.</p>
+<label>Ingrédient</label><select id="sub-ing"><option value="flour">Farine</option><option value="sugar">Sucre</option><option value="butter" selected>Beurre</option><option value="rice">Riz (cru)</option><option value="milk">Lait</option><option value="honey">Miel</option><option value="cocoa">Cacao en poudre</option><option value="oats">Flocons d'avoine</option><option value="oil">Huile d'olive</option><option value="chicken">Poulet (cru)</option><option value="egg">Œuf</option><option value="potato">Pomme de terre</option><option value="pasta">Pâtes (crues)</option><option value="cheese">Fromage râpé</option><option value="cream">Crème liquide</option><option value="yogurt">Yaourt nature</option><option value="fish">Poisson (filet)</option><option value="lentils">Lentilles (cuites)</option></select>
+<button class="calc" id="calc-sub">Calculer</button><div class="result" id="res-sub"></div></div>
+
+<div class="tool"><h3>Planificateur de repas et liste de courses</h3><p class="desc">Choisissez un plat pour chaque jour : la liste de courses se crée toute seule.</p>
+<label>Lundi</label><select id="plan-day1"><option value="">— Choisir un plat —</option><option value="poulet">Poulet rôti aux herbes</option><option value="pates">Pâtes à la tomate</option><option value="soupe">Soupe de légumes</option><option value="omelette">Omelette aux champignons</option><option value="riz">Riz sauté aux légumes</option><option value="poisson">Poisson grillé au citron</option><option value="lentilles">Salade de lentilles</option></select><label>Mardi</label><select id="plan-day2"><option value="">— Choisir un plat —</option><option value="poulet">Poulet rôti aux herbes</option><option value="pates">Pâtes à la tomate</option><option value="soupe">Soupe de légumes</option><option value="omelette">Omelette aux champignons</option><option value="riz">Riz sauté aux légumes</option><option value="poisson">Poisson grillé au citron</option><option value="lentilles">Salade de lentilles</option></select><label>Mercredi</label><select id="plan-day3"><option value="">— Choisir un plat —</option><option value="poulet">Poulet rôti aux herbes</option><option value="pates">Pâtes à la tomate</option><option value="soupe">Soupe de légumes</option><option value="omelette">Omelette aux champignons</option><option value="riz">Riz sauté aux légumes</option><option value="poisson">Poisson grillé au citron</option><option value="lentilles">Salade de lentilles</option></select><label>Jeudi</label><select id="plan-day4"><option value="">— Choisir un plat —</option><option value="poulet">Poulet rôti aux herbes</option><option value="pates">Pâtes à la tomate</option><option value="soupe">Soupe de légumes</option><option value="omelette">Omelette aux champignons</option><option value="riz">Riz sauté aux légumes</option><option value="poisson">Poisson grillé au citron</option><option value="lentilles">Salade de lentilles</option></select><label>Vendredi</label><select id="plan-day5"><option value="">— Choisir un plat —</option><option value="poulet">Poulet rôti aux herbes</option><option value="pates">Pâtes à la tomate</option><option value="soupe">Soupe de légumes</option><option value="omelette">Omelette aux champignons</option><option value="riz">Riz sauté aux légumes</option><option value="poisson">Poisson grillé au citron</option><option value="lentilles">Salade de lentilles</option></select><label>Samedi</label><select id="plan-day6"><option value="">— Choisir un plat —</option><option value="poulet">Poulet rôti aux herbes</option><option value="pates">Pâtes à la tomate</option><option value="soupe">Soupe de légumes</option><option value="omelette">Omelette aux champignons</option><option value="riz">Riz sauté aux légumes</option><option value="poisson">Poisson grillé au citron</option><option value="lentilles">Salade de lentilles</option></select><label>Dimanche</label><select id="plan-day7"><option value="">— Choisir un plat —</option><option value="poulet">Poulet rôti aux herbes</option><option value="pates">Pâtes à la tomate</option><option value="soupe">Soupe de légumes</option><option value="omelette">Omelette aux champignons</option><option value="riz">Riz sauté aux légumes</option><option value="poisson">Poisson grillé au citron</option><option value="lentilles">Salade de lentilles</option></select>
+<button class="calc" id="calc-plan">Calculer</button><div class="result" id="res-plan"></div></div>
+</div></div></section>
+<section id="tableau"><div class="wrap"><h2>Tableau de conversion des ingrédients</h2><p class="sec-sub">Combien pèse une tasse de chaque ingrédient ? (1 tasse = 240 ml)</p>
+<div class="table-wrap"><table><thead><tr><th>Ingrédient</th><th>1 tasse</th><th>À savoir</th></tr></thead><tbody><tr><td>Farine</td><td>120 g</td><td>Tassez légèrement, sans tasser fort.</td></tr><tr><td>Sucre en poudre</td><td>200 g</td><td>Le sucre roux pèse environ 220 g par tasse.</td></tr><tr><td>Beurre</td><td>227 g</td><td>Un bloc de 250 g ≈ 1 tasse + 1 c. à soupe.</td></tr><tr><td>Riz cru</td><td>185 g</td><td>Le riz double presque de volume à la cuisson.</td></tr><tr><td>Lait</td><td>245 g</td><td>Comme l'eau : 1 tasse ≈ 240 ml.</td></tr><tr><td>Miel</td><td>340 g</td><td>Le miel est dense : pesez-le plutôt que de le mesurer.</td></tr><tr><td>Cacao en poudre</td><td>100 g</td><td>Tamisez-le pour éviter les grumeaux.</td></tr><tr><td>Flocons d'avoine</td><td>90 g</td><td>Léger : une tasse pèse moins de 100 g.</td></tr><tr><td>Huile d'olive</td><td>216 g</td><td>1 tasse ≈ 240 ml.</td></tr><tr><td>Fromage râpé</td><td>110 g</td><td>Ne tassez pas : le volume varie selon la râpe.</td></tr></tbody></table></div></div></section>
+<section><div class="wrap"><h2>Températures du four</h2><p class="sec-sub">Conversion entre degrés Celsius, Fahrenheit et thermostat (gaz).</p>
+<div class="table-wrap"><table><thead><tr><th>°C</th><th>°F</th><th>Thermostat</th></tr></thead><tbody><tr><td>150 °C</td><td>300 °F</td><td>Thermostat 5</td></tr><tr><td>160 °C</td><td>325 °F</td><td>Thermostat 5–6</td></tr><tr><td>180 °C</td><td>350 °F</td><td>Thermostat 6</td></tr><tr><td>200 °C</td><td>400 °F</td><td>Thermostat 6–7</td></tr><tr><td>220 °C</td><td>425 °F</td><td>Thermostat 7–8</td></tr><tr><td>240 °C</td><td>475 °F</td><td>Thermostat 8</td></tr></tbody></table></div></div></section>
+<section id="guides"><div class="wrap"><h2>Guides de cuisine</h2><p class="sec-sub">Des conseils simples pour cuisiner mieux, chaque jour.</p>
+<div class="guides-grid"><a class="guide-card" href="guides/diners-faciles-semaine.html"><h3>10 dîners faciles en semaine</h3><p>Dix idées de repas rapides, équilibrés et sans stress pour les soirs de semaine.</p></a><a class="guide-card" href="guides/adapter-une-recette.html"><h3>Comment adapter n'importe quelle recette</h3><p>Doubler les portions, remplacer un ingrédient, baisser le sucre : les règles à connaître.</p></a><a class="guide-card" href="guides/essentiels-garde-manger.html"><h3>Les essentiels du garde-manger</h3><p>Les 25 ingrédients à toujours avoir chez soi pour cuisiner sans courir au magasin.</p></a><a class="guide-card" href="guides/bases-du-couteau.html"><h3>Les bases du couteau</h3><p>Choisir, tenir et entretenir son couteau : les gestes qui rendent la cuisine plus sûre et plus rapide.</p></a><a class="guide-card" href="guides/meal-prep-debutants.html"><h3>Meal prep pour débutants</h3><p>Préparez vos repas de la semaine en deux heures le dimanche : méthode pas à pas.</p></a><a class="guide-card" href="guides/conserver-les-restes.html"><h3>Comment conserver les restes en sécurité</h3><p>Refroidir, stocker, réchauffer : les règles simples pour éviter le gaspillage sans risque.</p></a></div></div></section>
+<section class="faq"><div class="wrap"><h2>Questions fréquentes</h2><p class="sec-sub">Les réponses aux questions que l'on nous pose le plus souvent.</p><details><summary>Combien pèse une tasse de farine ?</summary><p>Une tasse américaine (240 ml) de farine pèse environ 120 g si elle est versée à la cuillère, sans tasser. Si vous la tassez, elle peut atteindre 140 g : pesez toujours pour les pâtisseries délicates.</p></details><details><summary>Puis-je remplacer le beurre par de l'huile ?</summary><p>Oui, dans la plupart des gâteaux : comptez 80 ml d'huile pour 100 g de beurre. En revanche, pour les pâtes sablées ou feuilletées, gardez le beurre, car sa texture solide est indispensable.</p></details><details><summary>Comment savoir si mes restes sont encore bons ?</summary><p>Conservez-les au réfrigérateur dans un récipient fermé et consommez-les sous 3 à 4 jours. Réchauffez jusqu'à 74 °C à cœur et ne réchauffez jamais un plat deux fois.</p></details><details><summary>Quelle est la différence entre °F et °C ?</summary><p>Les recettes américaines utilisent les Fahrenheit (°F), les françaises les Celsius (°C). 180 °C correspondent à 350 °F : c'est la température la plus courante pour les gâteaux.</p></details><details><summary>Faut-il peser ou mesurer en tasses ?</summary><p>Peser est plus précis, surtout pour la farine et le sucre. Les tasses conviennent pour les liquides et les recettes simples du quotidien.</p></details></div></section>
+<script>
+const DENS = {"flour": 120, "sugar": 200, "butter": 227, "rice": 185, "milk": 245, "honey": 340, "cocoa": 100, "oats": 90, "oil": 216, "chicken": 200, "egg": 200, "potato": 200, "pasta": 120, "cheese": 110, "cream": 240, "yogurt": 245, "fish": 200, "lentils": 190};      // grammes par tasse (240 ml)
+const KCAL = {"flour": 364, "sugar": 387, "butter": 717, "rice": 365, "milk": 42, "honey": 304, "cocoa": 228, "oats": 389, "oil": 884, "chicken": 165, "egg": 155, "potato": 77, "pasta": 371, "cheese": 402, "cream": 195, "yogurt": 59, "fish": 120, "lentils": 116};      // kcal pour 100 g
+const SUBS = {"butter": {"sub": "Huile végétale ou huile d'olive", "ratio": "80 ml d'huile pour 100 g de beurre", "note": "Idéal pour les gâteaux moelleux ; évitez-le pour les pâtes sablées, qui ont besoin du beurre solide."}, "egg": {"sub": "Graines de lin moulues + eau", "ratio": "1 c. à soupe de lin + 3 c. à soupe d'eau = 1 œuf (laisser gonfler 5 min)", "note": "Convient aux muffins et aux gâteaux ; ne remplace pas l'œuf dans une omelette."}, "milk": {"sub": "Boisson végétale (soja, avoine, amande)", "ratio": "Même quantité, 1 pour 1", "note": "La boisson de soja donne le résultat le plus proche en pâtisserie."}, "sugar": {"sub": "Miel", "ratio": "80 g de miel pour 100 g de sucre, et retirez 2 c. à soupe de liquide", "note": "Le miel dore plus vite : baissez le four de 10 °C."}, "flour": {"sub": "Farine complète", "ratio": "Même quantité, ajoutez 1 à 2 c. à soupe d'eau", "note": "La pâte sera un peu plus dense ; parfait pour le pain et les muffins."}, "cream": {"sub": "Yaourt nature épais", "ratio": "Même quantité, 1 pour 1", "note": "Ne pas faire bouillir : ajoutez le yaourt hors du feu pour éviter qu'il tranche."}, "honey": {"sub": "Sirop d'érable", "ratio": "Même quantité, 1 pour 1", "note": "Saveur plus légère ; excellent dans les vinaigrettes et les marinades."}, "oil": {"sub": "Beurre fondu", "ratio": "100 g de beurre fondu pour 80 ml d'huile", "note": "Donne un goût plus riche ; évitez-le pour les fritures à haute température."}};      // ingrédient -> {sub, ratio, note}
+const DISHES = {"poulet": [["chicken", 600, "g"], ["potato", 500, "g"], ["oil", 30, "ml"], ["butter", 20, "g"]], "pates": [["pasta", 400, "g"], ["oil", 20, "ml"], ["cheese", 80, "g"], ["butter", 10, "g"]], "soupe": [["potato", 400, "g"], ["milk", 200, "ml"], ["butter", 20, "g"], ["cream", 100, "ml"]], "omelette": [["egg", 6, "pièce(s)"], ["cheese", 60, "g"], ["butter", 15, "g"], ["milk", 50, "ml"]], "riz": [["rice", 300, "g"], ["oil", 25, "ml"], ["egg", 2, "pièce(s)"], ["honey", 10, "g"]], "poisson": [["fish", 500, "g"], ["oil", 20, "ml"], ["butter", 15, "g"], ["rice", 200, "g"]], "lentilles": [["lentils", 250, "g"], ["oil", 30, "ml"], ["potato", 200, "g"], ["yogurt", 100, "g"]]};  // plat -> [[ingrédient, qty, unité], ...]
+const T = {"decimal": ",", "ingredient": "Ingrédient", "quantity": "Quantité", "grams": "Grammes", "tools_title": "Outils de cuisine", "tools_sub": "Cinq outils gratuits pour cuisiner plus facilement, sans inscription.", "tool1": "Ajusteur de recettes", "tool1_desc": "Changez le nombre de portions : les quantités sont recalculées automatiquement.", "orig_serv": "Portions d'origine", "new_serv": "Portions souhaitées", "ingredients": "Ingrédients", "tool2": "Convertisseur d'unités", "tool2_desc": "Convertissez tasses en grammes, grammes en tasses, et °F en °C.", "conversion": "Conversion", "c2g": "Tasses → grammes", "g2c": "Grammes → tasses", "f2c": "°F → °C", "c2f": "°C → °F", "value": "Valeur", "cups": "tasse(s)", "tool3": "Estimateur de calories par portion", "tool3_desc": "Additionnez vos ingrédients et obtenez les calories par portion.", "portions": "Nombre de portions", "tool4": "Substitutions d'ingrédients", "tool4_desc": "Il vous manque un ingrédient ? Trouvez un remplaçant et le bon dosage.", "tool5": "Planificateur de repas et liste de courses", "tool5_desc": "Choisissez un plat pour chaque jour : la liste de courses se crée toute seule.", "choose_dish": "— Choisir un plat —", "listTitle": "Votre liste de courses :", "calculate": "Calculer", "invalid": "Veuillez vérifier vos valeurs et réessayer.", "scaleResult": "Facteur d'ajustement : ×{f}. Nouvelles quantités :", "calResult": "Total : {t} kcal — soit {p} kcal par portion.", "table_title": "Tableau de conversion des ingrédients", "table_sub": "Combien pèse une tasse de chaque ingrédient ? (1 tasse = 240 ml)", "th_ing": "Ingrédient", "th_cup": "1 tasse", "th_note": "À savoir", "oven_title": "Températures du four", "oven_sub": "Conversion entre degrés Celsius, Fahrenheit et thermostat (gaz).", "th_c": "°C", "th_f": "°F", "th_gas": "Thermostat", "guides_title": "Guides de cuisine", "guides_sub": "Des conseils simples pour cuisiner mieux, chaque jour.", "faq_title": "Questions fréquentes", "faq_sub": "Les réponses aux questions que l'on nous pose le plus souvent.", "back_home": "Retour à l'accueil"};
+
+function scaleQty(q, fromServ, toServ){ return q * toServ / fromServ; }
+function cupsToGrams(cups, ing){ return cups * DENS[ing]; }
+function gramsToCups(g, ing){ return g / DENS[ing]; }
+function fToC(f){ return (f - 32) * 5 / 9; }
+function cToF(c){ return c * 9 / 5 + 32; }
+function caloriesFor(rows, portions){
+  let total = 0;
+  rows.forEach(function(r){ total += r[1] / 100 * KCAL[r[0]]; });
+  return total / portions;
+}
+function getSub(ing){ return SUBS[ing] || null; }
+function aggregateList(dishKeys){
+  const out = {};
+  dishKeys.forEach(function(k){
+    (DISHES[k] || []).forEach(function(it){
+      const key = it[0] + "||" + it[2];
+      if(!out[key]) out[key] = {ing: it[0], qty: 0, unit: it[2]};
+      out[key].qty += it[1];
+    });
+  });
+  return Object.keys(out).map(function(k){ return out[k]; });
+}
+function fmt(n){ return (Math.round(n * 100) / 100).toString().replace(".", T.decimal); }
+
+if (typeof document !== "undefined") {
+  function show(id, html){ const el = document.getElementById(id); el.innerHTML = html; el.classList.add("show"); }
+  function val(id){ return parseFloat(document.getElementById(id).value); }
+  function opt(id){ return document.getElementById(id).value; }
+
+  document.getElementById("calc-scale").addEventListener("click", function(){
+    const from = val("sc-from"), to = val("sc-to");
+    if(!from || !to || from <= 0 || to <= 0){ show("res-scale", T.invalid); return; }
+    let lines = [];
+    for(let i = 1; i <= 4; i++){
+      const name = document.getElementById("sc-name" + i).value.trim();
+      const q = parseFloat(document.getElementById("sc-qty" + i).value);
+      const unit = document.getElementById("sc-unit" + i).value;
+      if(name && !isNaN(q)) lines.push("<b>" + fmt(scaleQty(q, from, to)) + " " + unit + "</b> " + name);
+    }
+    show("res-scale", lines.length ? T.scaleResult.replace("{f}", fmt(to / from)) + "<br>" + lines.join("<br>") : T.invalid);
+  });
+
+  document.getElementById("calc-convert").addEventListener("click", function(){
+    const mode = opt("cv-mode"), ing = opt("cv-ing"), v = val("cv-val");
+    if(isNaN(v)){ show("res-convert", T.invalid); return; }
+    let out;
+    if(mode === "c2g") out = fmt(cupsToGrams(v, ing)) + " g";
+    else if(mode === "g2c") out = fmt(gramsToCups(v, ing)) + " " + T.cups;
+    else if(mode === "f2c") out = fmt(fToC(v)) + " °C";
+    else out = fmt(cToF(v)) + " °F";
+    show("res-convert", "<b>" + out + "</b>");
+  });
+
+  document.getElementById("calc-cal").addEventListener("click", function(){
+    const portions = val("cal-portions");
+    if(!portions || portions <= 0){ show("res-cal", T.invalid); return; }
+    let rows = [], total = 0;
+    for(let i = 1; i <= 4; i++){
+      const ing = opt("cal-ing" + i), g = parseFloat(document.getElementById("cal-g" + i).value);
+      if(!isNaN(g) && g > 0){ rows.push([ing, g]); total += g / 100 * KCAL[ing]; }
+    }
+    if(!rows.length){ show("res-cal", T.invalid); return; }
+    show("res-cal", T.calResult.replace("{t}", fmt(total)).replace("{p}", fmt(total / portions)));
+  });
+
+  document.getElementById("calc-sub").addEventListener("click", function(){
+    const s = getSub(opt("sub-ing"));
+    show("res-sub", s ? "<b>" + s.sub + "</b> — " + s.ratio + "<br>" + s.note : T.invalid);
+  });
+
+  document.getElementById("calc-plan").addEventListener("click", function(){
+    const keys = [];
+    for(let i = 1; i <= 7; i++){ const k = opt("plan-day" + i); if(k) keys.push(k); }
+    if(!keys.length){ show("res-plan", T.invalid); return; }
+    const list = aggregateList(keys);
+    show("res-plan", "<b>" + T.listTitle + "</b><br>" + list.map(function(it){ return "• " + fmt(it.qty) + " " + it.unit + " " + it.ing; }).join("<br>"));
+  });
+}
+</script>
+<footer><div class="wrap"><h4>À propos</h4><p>Recettes Faciles est un site gratuit qui aide les cuisiniers amateurs à réussir leurs plats du quotidien : des outils pratiques, des tableaux de conversion fiables et des guides clairs, sans compte ni inscription.</p><h4>Avertissement</h4><p>Les valeurs nutritionnelles et les conversions sont des estimations moyennes à titre informatif. Elles ne remplacent pas l'avis d'un professionnel de la nutrition ou de la santé. Vérifiez toujours les allergènes et adaptez les recettes à vos besoins.</p><p>&copy; 2026 Recettes Faciles. Tous droits réservés.</p></div></footer>
+</body>
+</html>

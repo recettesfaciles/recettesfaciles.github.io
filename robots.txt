@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://recettesfaciles.github.io/sitemap.xml
